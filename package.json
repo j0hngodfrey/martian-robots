@@ -1,0 +1,25 @@
+{
+  "name": "martian-robots",
+  "version": "1.0.0",
+  "description": "Computes the position of robots on a grid after a given set of movement instructions",
+  "main": "bin/index.js",
+  "bin": {
+    "robots": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j0hngodfrey/martian-robots.git"
+  },
+  "author": "John Godfrey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/j0hngodfrey/martian-robots/issues"
+  },
+  "homepage": "https://github.com/j0hngodfrey/martian-robots#readme",
+  "devDependencies": {
+    "jest": "^28.1.0"
+  }
+}
