@@ -1,5 +1,8 @@
 {
   "name": "martian-robots",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "version": "1.0.0",
   "description": "Computes the position of robots on a grid after a given set of movement instructions",
   "main": "bin/index.js",
