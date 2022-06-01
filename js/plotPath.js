@@ -33,6 +33,8 @@ const applyInstruction = (currentInstruction, state, lostRobotHistory) => {
       return { ...state, orientation: turnLeft(state.orientation) };
     case "F":
       return moveForward(state, lostRobotHistory);
+    default:
+      throw new Error(`Unsupported instruction: ${currentInstruction}`);
   }
 };
 

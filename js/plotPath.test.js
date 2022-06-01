@@ -53,3 +53,21 @@ describe("Robot tries to go off an edge where a previous robot fell off", () => 
     expect(result).toEqual({ isLost: false, orientation: "S", x: 2, y: 3 });
   });
 });
+
+describe("Robot tries to execute an unsupported instruction", () => {
+  it("should throw an error", () => {
+    expect(() =>
+      plotPath(
+        {
+          startX: "0",
+          startY: "3",
+          orientation: "W",
+          instructions: "LLBFFLFLFL",
+        },
+        5,
+        3,
+        []
+      )
+    ).toThrow("Unsupported instruction: B");
+  });
+});
