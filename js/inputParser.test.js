@@ -44,3 +44,13 @@ describe("When given valid input that uses CRLF line endings", () => {
     ).toEqual(expectedObject);
   });
 });
+
+describe("When given valid input with extra lines between the robots", () => {
+  it("returns an appropriate object", () => {
+    expect(
+      inputParser(
+        "5 3\r\n1 1 E\r\nRFRFRFRF\r\n\r\n3 2 N\r\nFRRFLLFFRRFLL\r\n\r\n0 3 W\r\nLLFFFLFLFL"
+      )
+    ).toEqual(expectedObject);
+  });
+});
