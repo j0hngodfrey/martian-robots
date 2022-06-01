@@ -54,6 +54,24 @@ describe("Robot tries to go off an edge where a previous robot fell off", () => 
   });
 });
 
+describe("Robot tries to go off an edge from a position which is a corner, and a previous robot has gone off the other side", () => {
+  it("should fall off", () => {
+    const result = plotPath(
+      {
+        startX: "0",
+        startY: "0",
+        orientation: "N",
+        instructions: "FRFF",
+      },
+      1,
+      1,
+      [{ x: 1, y: 1, orientation: "N", isLost: true }]
+    );
+
+    expect(result).toEqual({ isLost: true, orientation: "E", x: 1, y: 1 });
+  });
+});
+
 describe("Robot tries to execute an unsupported instruction", () => {
   it("should throw an error", () => {
     expect(() =>
@@ -69,5 +87,28 @@ describe("Robot tries to execute an unsupported instruction", () => {
         []
       )
     ).toThrow("Unsupported instruction: B");
+  });
+});
+
+describe("Robot is given input of the maximum sizes specified", () => {
+  it("should return its final location and orientation as usual", () => {
+    const result = plotPath(
+      {
+        instructions:
+          "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFLFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        orientation: "E",
+        startX: "0",
+        startY: "0",
+      },
+      50,
+      50,
+      []
+    );
+    expect(result).toEqual({
+      isLost: false,
+      orientation: "N",
+      x: 50,
+      y: 48,
+    });
   });
 });
