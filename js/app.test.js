@@ -3,7 +3,6 @@ const yargs = require("yargs");
 const fs = require("fs/promises");
 const inputParser = require("./inputParser");
 const plotPath = require("./plotPath");
-const { notDeepEqual } = require("assert");
 jest.mock("yargs");
 jest.mock("./inputParser");
 jest.mock("fs/promises");
