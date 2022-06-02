@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const instructionProvider = require("./instructions/instructionProvider");
 
 const plotPath = (robot, maxWidth, maxHeight, lostRobotHistory) => {
   let remainingInstructions = robot.instructions;
@@ -25,67 +26,9 @@ const plotPath = (robot, maxWidth, maxHeight, lostRobotHistory) => {
   return state;
 };
 
-const applyInstruction = (currentInstruction, state, lostRobotHistory) => {
-  switch (currentInstruction) {
-    case "R":
-      return { ...state, orientation: turnRight(state.orientation) };
-    case "L":
-      return { ...state, orientation: turnLeft(state.orientation) };
-    case "F":
-      return moveForward(state, lostRobotHistory);
-    default:
-      throw new Error(`Unsupported instruction: ${currentInstruction}`);
-  }
-};
-
-const moveForward = (state, lostRobotHistory) => {
-  if (
-    lostRobotHistory.find(
-      (lostRobotState) =>
-        lostRobotState.x === state.x &&
-        lostRobotState.y === state.y &&
-        lostRobotState.orientation === state.orientation
-    )
-  ) {
-    return state;
-  }
-
-  switch (state.orientation) {
-    case "N":
-      return { ...state, y: state.y + 1 };
-    case "E":
-      return { ...state, x: state.x + 1 };
-    case "S":
-      return { ...state, y: state.y - 1 };
-    case "W":
-      return { ...state, x: state.x - 1 };
-  }
-};
-
-const turnRight = (currentOrientation) => {
-  switch (currentOrientation) {
-    case "N":
-      return "E";
-    case "E":
-      return "S";
-    case "S":
-      return "W";
-    case "W":
-      return "N";
-  }
-};
-
-const turnLeft = (currentOrientation) => {
-  switch (currentOrientation) {
-    case "N":
-      return "W";
-    case "E":
-      return "N";
-    case "S":
-      return "E";
-    case "W":
-      return "S";
-  }
+const applyInstruction = (instruction, state, lostRobotHistory) => {
+  const requestedInstruction = instructionProvider(instruction);
+  return requestedInstruction(state, lostRobotHistory);
 };
 
 const isValid = (position, maxWidth, maxHeight) =>

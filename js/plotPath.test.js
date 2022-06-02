@@ -72,24 +72,6 @@ describe("Robot tries to go off an edge from a position which is a corner, and a
   });
 });
 
-describe("Robot tries to execute an unsupported instruction", () => {
-  it("should throw an error", () => {
-    expect(() =>
-      plotPath(
-        {
-          startX: "0",
-          startY: "3",
-          orientation: "W",
-          instructions: "LLBFFLFLFL",
-        },
-        5,
-        3,
-        []
-      )
-    ).toThrow("Unsupported instruction: B");
-  });
-});
-
 describe("Robot is given input of the maximum sizes specified", () => {
   it("should return its final location and orientation as usual", () => {
     const result = plotPath(
